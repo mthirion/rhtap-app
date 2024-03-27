@@ -1,0 +1,41 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "rhdh-testapp"
+  description: "A test app"
+  annotations:
+    argocd/app-selector: rht-gitops.com/janus-argocd=rhdh-testapp-bootstrap
+    backstage.io/kubernetes-id: rhdh-testapp
+    janus-idp.io/tekton: rhdh-testapp
+    backstage.io/source-location: url:https://github.com/mthirion/rhdh-testapp
+    backstage.io/techdocs-ref: url:https://github.com/mthirion/rhdh-testapp
+    gitlab.com/project-slug: mthirion/rhdh-testapp
+    quay.io/repository-slug: "/rhdh-testapp"
+  tags:
+    - java
+    - quarkus
+  links:
+    - url: https://devspaces.apps.ocp4.mthirion.eu/#https://github.com/mthirion/rhdh-testapp
+      title: OpenShift Dev Spaces (VS Code)
+      icon: web
+    - url: https://devspaces.apps.ocp4.mthirion.eu/#https://github.com/mthirion/rhdh-testapp?che-editor=che-incubator/che-idea/latest
+      title: OpenShift Dev Spaces (JetBrains IntelliJ)
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: "mthirion"
+  providesApis:
+    - "rhdh-testapp"
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: "rhdh-testapp"
+  description: "A test app"
+spec:
+  type: openapi
+  lifecycle: production
+  owner: "mthirion"
+  definition:
+    $text: ./openapi.yaml
